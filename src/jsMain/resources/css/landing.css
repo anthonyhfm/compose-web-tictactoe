@@ -41,4 +41,39 @@
     -webkit-text-fill-color: transparent;
 }
 
+button.goto-game-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
 
+    margin-top: 6rem;
+    border: none;
+    outline: none;
+
+    padding: 0.4rem 0.8rem;
+
+    border-radius: 0.2rem;
+
+    font-family: Inter, sans-serif;
+    font-weight: 600;
+    font-size: 1.2rem;
+
+    cursor: pointer;
+
+    background-color: #ecf1f6;
+    color: lightslategray;
+
+    transition: color 0.1s ease, background-color 0.1s ease;
+}
+
+button.goto-game-button:hover {
+    background-color: #d0d8e0;
+    color: slategray;
+}
+
+button.goto-game-button img {
+    height: 2rem;
+
+    transform: scaleX(-1);
+}

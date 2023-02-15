@@ -1,9 +1,7 @@
 import androidx.compose.runtime.Composable
 import components.Footer
 import components.Header
-import org.jetbrains.compose.web.dom.Div
-import org.jetbrains.compose.web.dom.Span
-import org.jetbrains.compose.web.dom.Text
+import org.jetbrains.compose.web.dom.*
 
 @Composable
 fun Landing() {
@@ -25,6 +23,14 @@ fun Landing() {
                 classes("jetpack-compose-label")
             }) {
                 Text("Jetpack Compose")
+            }
+
+            Button({
+                classes("goto-game-button")
+            }) {
+                Text("Play a game of TicTacToe")
+
+                Img(src = "static/side-panel--open--filled.svg")
             }
         }
 
