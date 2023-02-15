@@ -8,7 +8,7 @@ import org.jetbrains.compose.web.dom.*
 
 @Composable
 fun Landing() {
-    val showingLanding = remember { mutableStateOf(true) }
+    val showingLanding = remember { mutableStateOf(false) }
 
     Div({
         classes("landing-page")
