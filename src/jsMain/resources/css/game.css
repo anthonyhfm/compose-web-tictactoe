@@ -1,5 +1,7 @@
 .game-page {
-    display: flex;
+    display: grid;
+    grid-template-rows: 100px 1fr 100px;
+    flex-shrink: 0;
 
     width: 100vw;
     height: 100vh;

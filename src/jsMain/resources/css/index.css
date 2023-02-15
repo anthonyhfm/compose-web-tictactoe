@@ -10,3 +10,58 @@
 
     overflow: hidden;
 }
+
+.header {
+    display: flex;
+    justify-content: end;
+
+    height: 100%;
+    width: 100%;
+
+    box-sizing: border-box;
+    padding: 1.6rem;
+}
+
+.header img {
+    filter: brightness(4);
+
+    cursor: pointer;
+}
+
+.header img:hover {
+    filter: brightness(2);
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100%;
+    width: 100%;
+
+    font-family: Inter, sans-serif;
+    font-size: 1rem;
+
+    color: cornflowerblue;
+}
+
+.footer a:link {
+    color: cornflowerblue;
+
+    text-decoration: none;
+}
+
+.footer a:visited {
+    color: cornflowerblue;
+
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+.footer a:active {
+    text-decoration: underline;
+}
