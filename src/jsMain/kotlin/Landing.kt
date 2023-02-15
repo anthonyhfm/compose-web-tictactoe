@@ -1,12 +1,21 @@
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import components.Footer
 import components.Header
+import kotlinx.browser.document
 import org.jetbrains.compose.web.dom.*
 
 @Composable
 fun Landing() {
+    val showingLanding = remember { mutableStateOf(true) }
+
     Div({
         classes("landing-page")
+
+        if(!showingLanding.value) {
+            this.classes("hidden")
+        }
     }) {
         Header()
 
@@ -27,6 +36,10 @@ fun Landing() {
 
             Button({
                 classes("goto-game-button")
+
+                onClick {
+                    showingLanding.value = false
+                }
             }) {
                 Text("Play a game of TicTacToe")
 
