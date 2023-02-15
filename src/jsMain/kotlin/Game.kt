@@ -4,7 +4,7 @@ import org.jetbrains.compose.web.dom.Div
 @Composable
 fun Game() {
     Div({
-
+        classes("game-page")
     }) {
 
     }
