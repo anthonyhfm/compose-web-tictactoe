@@ -5,11 +5,17 @@ import components.Cross
 import components.Footer
 import components.Header
 import kotlinx.browser.document
+import kotlinx.browser.window
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.*
+import org.w3c.dom.events.KeyboardEvent
+import org.w3c.dom.events.KeyboardEventInit
 
 const val fieldSize: Int = 3
 var isPlayable: Boolean = true;
+
+val konamiCode: List<String> = listOf("arrowup", "arrowup", "arrowdown", "arrowdown", "arrowleft", "arrowright", "arrowleft", "arrowright", "b", "a")
+var konamiIndex: Int = 0;
 
 fun checkForWinner(field: SnapshotStateList<String>): String? {
     val winningPaths: List<List<Int>> = listOf(
@@ -52,6 +58,21 @@ fun checkForWinner(field: SnapshotStateList<String>): String? {
     return null
 }
 
+fun konamiHandler(inputKey: String) {
+    if(konamiCode[konamiIndex] == inputKey) {
+        konamiIndex++
+
+        if (konamiIndex == konamiCode.size) {
+            console.log("Konami Code Activated")
+
+            konamiIndex = 0
+        }
+    }
+    else {
+        konamiIndex = 0
+    }
+}
+
 @Composable
 fun Game() {
     val field = remember {
@@ -66,6 +87,14 @@ fun Game() {
 
     Div({
         classes("game-page")
+
+        /*window.addEventListener("keydown", {
+            console.log(it)
+        })*/
+
+        window.onkeydown = {
+            konamiHandler(it.key.lowercase())
+        }
     }) {
         Header()
 
