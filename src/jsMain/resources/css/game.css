@@ -7,6 +7,8 @@
     height: 100vh;
 
     background-color: lightgoldenrodyellow;
+
+    gap: 2rem;
 }
 
 .header img {
@@ -19,6 +21,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    flex-direction: column;
+
+    gap: 2rem;
+}
+
+.game-container span.game-title {
+    font-family: Inter, sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    opacity: 0.4;
 }
 
 .player-field {
@@ -28,6 +41,10 @@
 }
 
 .player-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     width: 100%;
     height: 100%;
 
@@ -45,3 +62,36 @@
 
     border-radius: 0.2rem;
 }
+
+.player-button.winning-field {
+    filter: hue-rotate(40deg);
+}
+
+.player-button.unselectable:hover {
+    width: 100%;
+    height: 100%;
+
+    border-radius: 0.4rem;
+
+    background-color: #ccccac;
+}
+
+.player-button img {
+    transition: scale 0.2s ease;
+
+    user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+
+    -webkit-user-drag: none;
+}
+
+.player-button:hover img {
+    scale: 0.8;
+}
+
+.player-button.unselectable:hover img {
+    scale: 1;
+}
+
