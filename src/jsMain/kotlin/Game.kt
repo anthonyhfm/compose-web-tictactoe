@@ -8,14 +8,14 @@ import kotlinx.browser.document
 import kotlinx.browser.window
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.*
-import org.w3c.dom.events.KeyboardEvent
-import org.w3c.dom.events.KeyboardEventInit
 
 const val fieldSize: Int = 3
-var isPlayable: Boolean = true;
+var isPlayable: Boolean = true
 
 val konamiCode: List<String> = listOf("arrowup", "arrowup", "arrowdown", "arrowdown", "arrowleft", "arrowright", "arrowleft", "arrowright", "b", "a")
-var konamiIndex: Int = 0;
+var konamiIndex: Int = 0
+
+var reverseMode: Boolean = false
 
 fun checkForWinner(field: SnapshotStateList<String>): String? {
     val winningPaths: List<List<Int>> = listOf(
@@ -46,8 +46,13 @@ fun checkForWinner(field: SnapshotStateList<String>): String? {
 
                 playerField?.classList?.add("unselectable")
 
-                if(i in path) {
-                    playerField?.classList?.add("winning-field")
+                if (i in path) {
+                    if (reverseMode) {
+                        playerField?.classList?.add("loosing-field")
+                    }
+                    else {
+                        playerField?.classList?.add("winning-field")
+                    }
                 }
             }
 
@@ -63,7 +68,9 @@ fun konamiHandler(inputKey: String) {
         konamiIndex++
 
         if (konamiIndex == konamiCode.size) {
-            console.log("Konami Code Activated")
+            reverseMode = !reverseMode
+
+            document.getElementById("game-page")?.classList?.toggle("reverse-mode")
 
             konamiIndex = 0
         }
@@ -84,13 +91,12 @@ fun Game() {
     }
 
     val playerTurn = remember { mutableStateOf("X") }
+    val gameIsWon = remember { mutableStateOf(false) }
+    val gameTitle = remember { mutableStateOf("Tic Tac Toe 2-Player") }
 
     Div({
+        id("game-page")
         classes("game-page")
-
-        /*window.addEventListener("keydown", {
-            console.log(it)
-        })*/
 
         window.onkeydown = {
             konamiHandler(it.key.lowercase())
@@ -101,8 +107,11 @@ fun Game() {
         Div({
             classes("game-container")
         }) {
-            Span({ classes("game-title") }) {
-                Text("Tic Tac Toe 2-Player")
+            Span({
+                id("game-title")
+                classes("game-title")
+            }) {
+                Text(gameTitle.value)
             }
 
             Div({
@@ -127,7 +136,12 @@ fun Game() {
                                 val winner = checkForWinner(field)
 
                                 if (winner != null) {
+                                    gameTitle.value = "Player $winner has won the Game!"
+
+                                    document.getElementById("game-title")?.classList?.add("expand")
+
                                     isPlayable = false
+                                    gameIsWon.value = true
                                 }
                             }
                         }
@@ -140,7 +154,33 @@ fun Game() {
                         }
                     }
                 }
+            }
 
+            if (gameIsWon.value) {
+                Button({
+                    classes("retry-button")
+
+                    onClick {
+                        for (i in 0 until 9) {
+                            field[i] = ""
+
+                            val playerField = document.getElementById("player-button-$i")
+
+                            playerField?.classList?.remove("winning-field")
+                            playerField?.classList?.remove("loosing-field")
+                            playerField?.classList?.remove("unselectable")
+                        }
+
+                        document.getElementById("game-title")?.classList?.remove("expand")
+
+                        gameTitle.value = "Tic Tac Toe 2-Player"
+
+                        gameIsWon.value = false;
+                        isPlayable = true;
+                    }
+                }) {
+                    Text("Retry")
+                }
             }
         }
 

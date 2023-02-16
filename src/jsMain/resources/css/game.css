@@ -9,6 +9,8 @@
     background-color: lightgoldenrodyellow;
 
     gap: 2rem;
+
+    transition: background-color 0.3s ease;
 }
 
 .header img {
@@ -32,6 +34,13 @@
     font-size: 1.4rem;
     font-weight: 700;
     opacity: 0.4;
+
+    transition: font-size 0.5s ease, margin-bottom 0.5s ease;
+}
+
+.game-container span.game-title.expand {
+    font-size: 2rem;
+    margin-bottom: 1rem;
 }
 
 .player-field {
@@ -67,6 +76,10 @@
     filter: hue-rotate(40deg);
 }
 
+.player-button.loosing-field {
+    filter: hue-rotate(80deg);
+}
+
 .player-button.unselectable:hover {
     width: 100%;
     height: 100%;
@@ -74,6 +87,8 @@
     border-radius: 0.4rem;
 
     background-color: #ccccac;
+
+    cursor: not-allowed;
 }
 
 .player-button img {
@@ -95,3 +110,43 @@
     scale: 1;
 }
 
+.game-page.reverse-mode {
+    background-color: darkslateblue;
+}
+
+.game-page.reverse-mode .player-button {
+    background-color: #362e6b;
+}
+
+.game-page.reverse-mode .player-button img {
+    filter: brightness(4);
+    opacity: 0.5;
+}
+
+.game-page.reverse-mode .player-button.unselectable:hover {
+    background-color: #2b2557;
+}
+
+.retry-button {
+    position: fixed;
+    margin-top: 600px;
+    border: none;
+    outline: none;
+
+    padding: 0.4rem 0.8rem;
+
+    border-radius: 0.2rem;
+
+    font-family: Inter, sans-serif;
+    font-weight: 600;
+    font-size: 1.2rem;
+
+    cursor: pointer;
+
+    background-color: black;
+    color: white;
+
+    opacity: 0.6;
+
+    transition: color 0.1s ease, background-color 0.1s ease;
+}
