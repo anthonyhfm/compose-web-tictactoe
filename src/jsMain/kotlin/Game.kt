@@ -56,7 +56,11 @@ fun checkForWinner(field: SnapshotStateList<String>): String? {
                 }
             }
 
-            return checkPlayer
+            return if (reverseMode) {
+                if(checkPlayer == "X") "O" else "X"
+            } else {
+                checkPlayer
+            }
         }
     }
 
@@ -174,6 +178,8 @@ fun Game() {
                         document.getElementById("game-title")?.classList?.remove("expand")
 
                         gameTitle.value = "Tic Tac Toe 2-Player"
+
+                        playerTurn.value = "X"
 
                         gameIsWon.value = false;
                         isPlayable = true;
